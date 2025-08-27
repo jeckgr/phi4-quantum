@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <double complex.h>
+#include <complex.h>
 #include <omp.h>
 
 /*
