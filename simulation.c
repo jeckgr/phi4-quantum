@@ -116,10 +116,10 @@ unsigned long long genrand64_int64(MTrand* rand)
     return x;
 }
 
-/* generates a random number on [0,1)-real-interval */
-double genrand64_real2(MTrand* rand)
+/* generates a random number on (0,1)-real-interval */
+double genrand64_real3(MTrand* rand)
 {
-    return (genrand64_int64(rand) >> 11) * (1.0/9007199254740992.0);
+    return ((genrand64_int64(rand) >> 12) + 0.5) * (1.0/4503599627370496.0);
 }
 
 int main() {
@@ -197,8 +197,8 @@ int main() {
             for (int x = 0; x < ns; ++x) {
                 for (int y = 0; y < ns; ++y) {
                     for (int z = 0; z < ns; ++z) {
-                        double u1 = genrand64_real2(&rng[omp_get_thread_num()]);
-                        double u2 = genrand64_real2(&rng[omp_get_thread_num()]);
+                        double u1 = genrand64_real3(&rng[omp_get_thread_num()]);
+                        double u2 = genrand64_real3(&rng[omp_get_thread_num()]);
                         double nor = sqrt(-2*log(u1))*cos(2*M_PI*u2);
                         phi[t][x][y][z] = sqrt(2*step)*nor;
                     }
@@ -237,8 +237,8 @@ int main() {
                 for (int x = 0; x < ns; ++x) {
                     for (int y = 0; y < ns; ++y) {
                         for (int z = 0; z < ns; ++z) {
-                            double u1 = genrand64_real2(&rng[omp_get_thread_num()]);
-                            double u2 = genrand64_real2(&rng[omp_get_thread_num()]);
+                            double u1 = genrand64_real3(&rng[omp_get_thread_num()]);
+                            double u2 = genrand64_real3(&rng[omp_get_thread_num()]);
                             double nor = sqrt(-2*log(u1))*cos(2*M_PI*u2);
                             phi[t][x][y][z] += -I*(step/kmax)*psi[t][x][y][z]+sqrt(2*step/kmax)*nor;
                         }
