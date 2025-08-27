@@ -252,7 +252,7 @@ int main() {
                         for (int x = 0; x < ns; ++x) {
                             for (int y = 0; y < ns; ++y) {
                                 for (int z = 0; z < ns; ++z) {
-                                    cor[t] += phi[tp][x][y][z]*phi[(t+tp)%nt][x][y][z]/(double)(ns*ns*ns*nt);
+                                    cor[t] += phi[tp][x][y][z]*phi[(t+tp)%nt][x][y][z]/(ns*ns*ns*nt);
                                 }
                             }
                         }
